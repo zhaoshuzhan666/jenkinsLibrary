@@ -1,3 +1,6 @@
+#!groovy
+@Library('jenkinsLibrary'@master) _
+def build = new org.devops.build()
 pipeline{
     agent { node { label "master"} }
 
@@ -5,8 +8,9 @@ pipeline{
         stage("build"){
             steps{
                 script{
-                    mvnHome = tool "m2"
-                    sh "${mvnHome}/bin/mvn -v"
+                    build.Build(buildType,buildShell)
+                   // mvnHome = tool "m2"
+                   // sh "${mvnHome}/bin/mvn -v"
                 }
             }
         }
