@@ -32,8 +32,8 @@ pipeline {
                         println('获取代码')
                         tools.PrintMes("获取代码",'green')
                         println("${test}")
-                        
-                        input id: 'Test', message: '我们是否要继续？', ok: '是，继续吧！', parameters: [choice(choices: ['a', 'b'], description: '', name: 'test1')], submitter: 'lizeyang,admin'
+
+                        git credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: 'https://gitee.com/sheyuzsz/sonar-demo.git'
                     }
                 }
             }
@@ -53,7 +53,7 @@ pipeline {
                                 mvnHome = tool "m2"
                                 println(mvnHome)
                                 
-                                sh "${mvnHome}/bin/mvn --version"
+                                sh "${mvnHome}/bin/mvn clean package"
                             }
                         }
                     }
@@ -79,6 +79,9 @@ pipeline {
         always {
             script{
                 println("always")
+                sh """
+                    echo "ddddddddddddddddddddddd"
+                    """
             }
         }
 
