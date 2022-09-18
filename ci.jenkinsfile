@@ -15,6 +15,10 @@ pipeline{
         stage("CheckOut"){
             steps{
                 script{
+                    if("${runOpts}"== "GitlabPush"){
+                        branchName = branch -  "refs/heads/"
+                    }
+                    println("${branchName}")
                     tools.PrintMes("获取代码","green")
                      checkout([$class: 'GitSCM', branches: [[name: '${branchName}']], extensions: [], userRemoteConfigs: [[credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: '${srcUrl}']]])
                 }
