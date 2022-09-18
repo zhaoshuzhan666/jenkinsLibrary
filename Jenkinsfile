@@ -80,6 +80,7 @@ pipeline {
         always {
             script{
                 println("always")
+                withEnv(['JENKINS_NODE_COOKIE=dontkillme']){ 
                 sh """
                     echo "ddddddddddddddddddddddd"
                     
@@ -107,6 +108,7 @@ pipeline {
                     start
                     echo "dddddddddd333333333d"
                     """
+                }
             }
         }
 
