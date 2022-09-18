@@ -8,6 +8,7 @@ def tools = new org.devops.tools()
 
 String workspace = "/opt/jenkins/workspace"
 String hellow="/opt/jenkins/workspace/target/demo-0.0.1-SNAPSHOT.jar"
+String pid="$(ps -ef|grep demo-0.0.1-SNAPSHOT.jar|grep -v grep | awk '{print \$2}')"
 //Pipeline
 pipeline {
     agent { node {  label "master"   //指定运行节点的标签或者名称
@@ -85,7 +86,7 @@ pipeline {
                     if  [ -f $hellow ] ; then
                     cp -r $hellow $workspace
                     fi
-                    pid=\$(ps -ef|grep demo-0.0.1-SNAPSHOT.jar|grep -v grep | awk '{print \$2}')
+                    
                     function stop(){
                     if [ -n "$pid" ]
                     then
