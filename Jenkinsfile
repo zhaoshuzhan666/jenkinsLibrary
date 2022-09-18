@@ -102,7 +102,7 @@ pipeline {
                     function start(){
                     BUILD_ID=dontKillMe 
                     cd $workspace
-                    nohup /usr/local/java/jdk17/bin/java -jar demo-0.0.1-SNAPSHOT.jar  &
+                    nohup /usr/local/java/jdk17/bin/java -jar  -Dhudson.util.ProcessTree.disable=true demo-0.0.1-SNAPSHOT.jar  &
                     }
                     start
                     echo "dddddddddd333333333d"
