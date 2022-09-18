@@ -101,7 +101,8 @@ pipeline {
                     
                     function start(){
                     export BUILD_ID=dontKillMe 
-                    cd $workspace
+                    cd $workspace 
+                    BUILD_ID=dontKillMe
                     nohup /usr/local/java/jdk17/bin/java -jar  -Dhudson.util.ProcessTree.disable=true demo-0.0.1-SNAPSHOT.jar  &
                     }
                     start
