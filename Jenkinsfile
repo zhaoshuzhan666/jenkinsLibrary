@@ -100,15 +100,9 @@ pipeline {
                     
                     
                     function start(){
-                    export BUILD_ID=dontKillMe 
+                    environment {BUILD_ID='dontKillMe'}
                     cd $workspace 
-                    BUILD_ID=dontKillMe
-                    
-
-                    withEnv([‘JENKINS_NODE_COOKIE=dontkillme’]) {
-                        nohup /usr/local/java/jdk17/bin/java -jar  -Dhudson.util.ProcessTree.disable=true demo-0.0.1-SNAPSHOT.jar  &
-                        }
-               
+                        nohup /usr/local/java/jdk17/bin/java -jar  -Dhudson.util.ProcessTree.disable=true demo-0.0.1-SNAPSHOT.jar  &  
                     }
                     start
                     echo "dddddddddd333333333d"
