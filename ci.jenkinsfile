@@ -5,10 +5,16 @@ def deploy = new org.devops.deploy()
 string buildShell = "${env.buildShell}"
 String buildType = "${env.buildType}"
 String deployHosts = "${env.deployHosts}"
+String srcUrl = "${env.srcUrl}"
+String branchName = "${env.branchName}"
 pipeline{
     agent { node { label "master"} }
 
     stages{
+        stage("CheckOut"){
+            checkout([$class: 'GitSCM', branches: [[name: "${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: '${srcUrl}']]])
+        }
+
         stage("build"){
             steps{
                 script{
