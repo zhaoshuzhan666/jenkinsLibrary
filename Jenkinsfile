@@ -6,7 +6,7 @@ def tools = new org.devops.tools()
 
 
 
-String workspace = "/opt/jenkins/workspace"
+String workspace = "/opt/jenkins/workspace/target"
 String hellow="/opt/jenkins/workspace/target/demo-0.0.1-SNAPSHOT.jar"
 String pid="\$(ps -ef|grep demo-0.0.1-SNAPSHOT.jar|grep -v grep | awk '{print \$2}')"
 //Pipeline
