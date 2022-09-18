@@ -1,6 +1,7 @@
 #!groovy
 @Library('jenkinsLibrary@master') _
 def build = new org.devops.build()
+def tools = new org.devops.tools()
 def deploy = new org.devops.deploy()
 string buildShell = "${env.buildShell}"
 String buildType = "${env.buildType}"
@@ -14,6 +15,7 @@ pipeline{
         stage("CheckOut"){
             steps{
                 script{
+                    tools.PrintMes("获取代码","green")
                      checkout([$class: 'GitSCM', branches: [[name: '${branchName}']], extensions: [], userRemoteConfigs: [[credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: '${srcUrl}']]])
                 }
             }
@@ -22,6 +24,7 @@ pipeline{
         stage("Build"){
             steps{
                 script{
+                    tools.PrintMes("执行打包","green")
                     build.Build(buildType,buildShell)
                 }
             }
