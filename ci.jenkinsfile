@@ -1,0 +1,14 @@
+pipeline{
+    agent { node { label "master"} }
+
+    steges{
+        stage("build"){
+            steps{
+                script{
+                    mvnHome = tool "mvn"
+                    sh "${mvnHome/bin/mvn -v}"
+                }
+            }
+        }
+    }
+}
