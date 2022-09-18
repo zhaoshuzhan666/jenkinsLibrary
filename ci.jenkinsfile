@@ -12,7 +12,11 @@ pipeline{
 
     stages{
         stage("CheckOut"){
-            checkout([$class: 'GitSCM', branches: [[name: '${branchName}']], extensions: [], userRemoteConfigs: [[credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: '${srcUrl}']]])
+            steps{
+                script{
+                     checkout([$class: 'GitSCM', branches: [[name: '${branchName}']], extensions: [], userRemoteConfigs: [[credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: '${srcUrl}']]])
+                }
+            }
         }
 
         stage("Build"){
