@@ -7,7 +7,7 @@ def tools = new org.devops.tools()
 
 
 String workspace = "/opt/jenkins/workspace"
-String hellow="/var/lib/jenkins/workspace/helloWorld/target/demo-0.0.1-SNAPSHOT.jar"
+String hellow="/opt/jenkins/workspace/target/demo-0.0.1-SNAPSHOT.jar"
 //Pipeline
 pipeline {
     agent { node {  label "master"   //指定运行节点的标签或者名称
@@ -83,7 +83,7 @@ pipeline {
                     echo "ddddddddddddddddddddddd"
                     
                     if  [ -f $hellow ] ; then
-                    cp -r $hellow /var/lib/jenkins/
+                    cp -r $hellow $workspace
                     fi
                     pid=\$(ps -ef|grep demo-0.0.1-SNAPSHOT.jar|grep -v grep | awk '{print \$2}')
                     function stop(){
@@ -99,7 +99,7 @@ pipeline {
                     
                     BUILD_ID=dontKillMe
                     function start(){
-                    cd /var/lib/jenkins
+                    cd $workspace
                     nohup /usr/local/java/jdk17/bin/java -jar demo-0.0.1-SNAPSHOT.jar  &
                     }
                     start
