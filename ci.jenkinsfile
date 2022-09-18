@@ -1,8 +1,10 @@
 #!groovy
 @Library('jenkinsLibrary@master') _
 def build = new org.devops.build()
+def deploy = new org.devops.deploy()
 string buildShell = "${env.buildShell}"
 String buildType = "${env.buildType}"
+String deployHosts = "${env.deployHosts}"
 pipeline{
     agent { node { label "master"} }
 
@@ -11,6 +13,7 @@ pipeline{
             steps{
                 script{
                     build.Build(buildType,buildShell)
+                    deploy.AnsibleDeploy("${deployHosts}","-m ping ")
                    // mvnHome = tool "m2"
                    // sh "${mvnHome}/bin/mvn -v"
                 }
