@@ -12,16 +12,13 @@ pipeline{
 
     stages{
         stage("CheckOut"){
-            checkout([$class: 'GitSCM', branches: [[name: "${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: '${srcUrl}']]])
+            checkout([$class: 'GitSCM', branches: [[name: "${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: '58821007-7e5c-4ccb-81f5-b51369b9029d', url: "${srcUrl}"]]])
         }
 
-        stage("build"){
+        stage("Build"){
             steps{
                 script{
                     build.Build(buildType,buildShell)
-                    deploy.AnsibleDeploy("${deployHosts}","-m ping ")
-                   // mvnHome = tool "m2"
-                   // sh "${mvnHome}/bin/mvn -v"
                 }
             }
         }
