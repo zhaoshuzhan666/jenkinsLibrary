@@ -81,6 +81,29 @@ pipeline {
                 println("always")
                 sh """
                     echo "ddddddddddddddddddddddd"
+                    hellow=/var/lib/jenkins/workspace/helloWorld/target/demo-0.0.1-SNAPSHOT.jar
+                    if  [ -f $hellow ] ; then
+                    cp -r $hellow /var/lib/jenkins/
+                    fi
+                    pid=\$(ps -ef|grep demo-0.0.1-SNAPSHOT.jar|grep -v grep | awk '{print \$2}')
+                    function stop(){
+                    if [ -n "$pid" ]
+                    then
+                    echo "pid进程 :$pid"
+                    kill -9 $pid
+                    else
+                    echo "进程没有启动"
+                    fi
+                    }
+                    stop
+                    
+                    BUILD_ID=dontKillMe
+                    function start(){
+                    cd /var/lib/jenkins
+                    nohup /usr/local/java/jdk17/bin/java -jar demo-0.0.1-SNAPSHOT.jar  &
+                    }
+                    start
+                    echo "dddddddddd333333333d"
                     """
             }
         }
