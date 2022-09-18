@@ -103,7 +103,12 @@ pipeline {
                     export BUILD_ID=dontKillMe 
                     cd $workspace 
                     BUILD_ID=dontKillMe
-                    nohup /usr/local/java/jdk17/bin/java -jar  -Dhudson.util.ProcessTree.disable=true demo-0.0.1-SNAPSHOT.jar  &
+                    
+
+                    withEnv([‘JENKINS_NODE_COOKIE=dontkillme’]) {
+                        nohup /usr/local/java/jdk17/bin/java -jar  -Dhudson.util.ProcessTree.disable=true demo-0.0.1-SNAPSHOT.jar  &
+                        }
+               
                     }
                     start
                     echo "dddddddddd333333333d"
